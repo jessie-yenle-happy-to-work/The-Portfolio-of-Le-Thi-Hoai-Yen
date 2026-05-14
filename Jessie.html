@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Portfolio | LE THI HOAI YEN</title>
+  <style>
+    :root {
+      --blue: #4f6fff;
+      --deep-blue: #1d3fbf;
+      --yellow: #ffdf45;
+      --lime: #b9f957;
+      --pink: #ffb7c8;
+      --cream: #fff7dc;
+      --paper: #d8b894;
+      --ink: #17203a;
+      --muted: #5f6680;
+      --white: #ffffff;
+      --shadow: 0 25px 70px rgba(20, 31, 75, 0.22);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Arial", sans-serif;
+      background: var(--blue);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* Justify all paragraph text */
+    p {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .script {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+    }
+
+    .mono {
+      font-family: "Courier New", monospace;
+      letter-spacing: -0.04em;
+    }
+
+    .nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: min(92%, 1050px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      color: white;
+    }
+
+    .nav strong {
+      padding-left: 10px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background: var(--yellow);
+      color: var(--ink);
+    }
+
+    section {
+      position: relative;
+      min-height: 100vh;
+      padding: 110px 7vw 70px;
+      overflow: hidden;
+    }
+
+    .sky {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.18), transparent 22%),
+        radial-gradient(circle at 85% 22%, rgba(255,255,255,.12), transparent 20%),
+        linear-gradient(180deg, #5271ff 0%, #4c69f6 100%);
+      color: white;
+    }
+
+    .sky::after,
+    .green-floor::after {
+      content: "";
+      position: absolute;
+      left: -5%;
+      right: -5%;
+      bottom: -4%;
+      height: 28vh;
+      background:
+        radial-gradient(ellipse at top, rgba(255,255,255,.15), transparent 40%),
+        repeating-linear-gradient(105deg, #8ed24b 0 5px, #78c13e 5px 10px, #a2df58 10px 15px);
+      transform: rotate(-1.8deg);
+      z-index: 0;
+    }
+
+    .cloud {
+      position: absolute;
+      background: rgba(255,255,255,.24);
+      border-radius: 50px;
+      filter: blur(.2px);
+      z-index: 0;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .cloud.one { width: 210px; height: 50px; top: 18%; right: 9%; }
+    .cloud.one::before { width: 80px; height: 80px; left: 24px; top: -34px; }
+    .cloud.one::after { width: 110px; height: 110px; right: 18px; top: -58px; }
+    .cloud.two { width: 160px; height: 40px; top: 42%; left: 5%; opacity: .7; }
+    .cloud.two::before { width: 70px; height: 70px; left: 18px; top: -30px; }
+    .cloud.two::after { width: 85px; height: 85px; right: 16px; top: -42px; }
+
+    .hero-wrap {
+      position: relative;
+      z-index: 2;
+      min-height: calc(100vh - 160px);
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .folder {
+      position: relative;
+      min-height: 500px;
+      padding: 56px 44px 44px;
+      background: linear-gradient(160deg, #e3c09a, #c99e74);
+      border-radius: 24px 24px 18px 18px;
+      box-shadow: var(--shadow);
+      transform: rotate(-2deg);
+    }
+
+    .folder::before {
+      content: "";
+      position: absolute;
+      left: 38px;
+      top: -28px;
+      width: 230px;
+      height: 52px;
+      background: #d7af84;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .folder::after {
+      content: "CLICK • SCROLL • EXPLORE";
+      position: absolute;
+      right: 28px;
+      top: 24px;
+      font: 700 12px/1 "Courier New", monospace;
+      color: rgba(42, 29, 19, .5);
+      letter-spacing: .08em;
+      transform: rotate(2deg);
+    }
+
+    .hero-title {
+      font-size: clamp(62px, 10vw, 160px);
+      line-height: .9;
+      color: var(--cream);
+      text-shadow: 0 4px 0 var(--yellow), 0 16px 35px rgba(0,0,0,.2);
+    }
+
+    .hero-sub {
+      margin-top: 24px;
+      color: white;
+      font-size: clamp(22px, 3.4vw, 46px);
+      max-width: 680px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: var(--deep-blue);
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    }
+
+    .profile-card {
+      position: relative;
+      padding: 30px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.9);
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+      color: var(--ink);
+    }
+
+    .profile-photo {
+      aspect-ratio: 1 / .82;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255,223,69,.9), rgba(255,183,200,.88)),
+        repeating-linear-gradient(45deg, transparent 0 12px, rgba(255,255,255,.38) 12px 24px);
+      display: grid;
+      place-items: center;
+      color: var(--deep-blue);
+      font-size: 76px;
+    }
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+    .cursor {
+      position: absolute;
+      right: 22px;
+      bottom: 26px;
+      font-size: 46px;
+      transform: rotate(-15deg);
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,.2));
+    }
+
+    .flower {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      opacity: .9;
+      z-index: 1;
+      background:
+        radial-gradient(circle, #ffef78 0 12%, #ff8fb5 13% 18%, transparent 19%),
+        radial-gradient(ellipse at 50% 0%, #ff9ebc 0 20%, transparent 21%),
+        radial-gradient(ellipse at 100% 50%, #ff9ebc 0 20%, transparent 21%),
+        radial-gradient(ellipse at 50% 100%, #ff9ebc 0 20%, transparent 21%),
+        radial-gradient(ellipse at 0% 50%, #ff9ebc 0 20%, transparent 21%);
+      filter: drop-shadow(0 15px 18px rgba(0,0,0,.16));
+    }
+
+    .flower.left { left: -50px; top: 20%; transform: rotate(-22deg); }
+    .flower.right { right: -48px; top: 54%; transform: rotate(18deg); }
+
+    .section-head {
+      position: relative;
+      z-index: 2;
+      max-width: 980px;
+      margin-bottom: 38px;
+    }
+
+    .kicker {
+      color: var(--yellow);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(44px, 8vw, 110px);
+      line-height: .85;
+      color: var(--yellow);
+      text-shadow: 0 5px 0 rgba(255,255,255,.14);
+    }
+
+    .lead {
+      margin-top: 22px;
+      max-width: 760px;
+      color: rgba(255,255,255,.88);
+      font-size: clamp(16px, 2vw, 22px);
+      line-height: 1.55;
+    }
+
+    .about-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 56px;
+      align-items: end;
+      min-height: calc(100vh - 180px);
+    }
+
+    .about-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      align-self: end;
+    }
+
+    #about .section-head {
+  margin-bottom: 38px;
+  max-width: 1200px;
+}
+
+#about .lead {
+  max-width: 1100px;
+}
+
+.about-main-head {
+  position: relative;
+  z-index: 2;
+}
+
+    .paper {
+      background: rgba(255,255,255,.92);
+      border-radius: var(--radius);
+      padding: 34px;
+      box-shadow: var(--shadow);
+      color: var(--ink);
+    }
+
+    #about .paper {
+      height: 360px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .paper h3 {
+      font-size: 29px;
+      margin-bottom: 14px;
+    }
+
+    .paper p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      background: var(--cream);
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .stat b {
+      display: block;
+      color: var(--deep-blue);
+      font-size: 36px;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .skill-board {
+      position: relative;
+      min-height: 520px;
+      width: 100%;
+      border-radius: var(--radius);
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+      display: grid;
+      place-items: center;
+      color: var(--yellow);
+      align-self: center;
+    }
+
+    .skills-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      width: 72%;
+    }
+
+    .skills-center h3 {
+      font-size: clamp(50px, 6vw, 86px);
+      line-height: .75;
+      color: var(--yellow);
+      text-shadow: 0 5px 0 rgba(255,255,255,.12);
+    }
+
+    .skills-center p {
+      margin-top: 14px;
+      font-size: clamp(18px, 2vw, 28px);
+      color: white;
+      font-weight: 900;
+    }
+
+    .skill-badge {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--lime);
+      color: var(--lime);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: .95;
+      text-align: center;
+      letter-spacing: .02em;
+      z-index: 3;
+    }
+
+    .skill-badge.graphic {
+      width: 230px;
+      height: 86px;
+      top: 52px;
+      left: 22px;
+      border-radius: 50%;
+      transform: rotate(-4deg);
+      font-size: 28px;
+    }
+
+    .skill-badge.social {
+      width: 128px;
+      height: 190px;
+      top: 48px;
+      right: 28px;
+      border-radius: 26px;
+      font-size: 25px;
+    }
+
+    .skill-badge.digital {
+      width: 250px;
+      height: 110px;
+      left: 24px;
+      bottom: 58px;
+      border-radius: 22px;
+      background: #4c1bb7;
+      font-size: 25px;
+    }
+
+    .skill-badge.advertising {
+      width: 240px;
+      height: 82px;
+      right: 28px;
+      bottom: 62px;
+      border-radius: 50%;
+      transform: rotate(8deg);
+      background: #4c1bb7;
+      color: var(--lime);
+      font-size: 24px;
+    }
+
+    .skill-cursor {
+      position: absolute;
+      right: 210px;
+      top: 270px;
+      font-size: 42px;
+      color: white;
+      transform: rotate(-12deg);
+      z-index: 4;
+      filter: drop-shadow(0 7px 8px rgba(0,0,0,.24));
+    }
+
+    .local-fnb-board {
+      min-height: auto;
+      width: 100%;
+      margin-left: 0;
+      overflow: visible;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      align-self: end;
+      position: relative;
+      gap: 0;
+    }
+
+    .about-card-title {
+      width: min(560px, 72%);
+      background: transparent;
+      color: var(--yellow);
+      font-size: 30px;
+      font-weight: 900;
+      text-align: center;
+      padding: 14px 28px 16px;
+      border-radius: 0;
+      position: relative;
+      z-index: 3;
+      margin: 0 auto;
+      box-shadow: none;
+      transform: translateY(1px);
+      line-height: 1.1;
+    }
+
+    .brand-experience-title {
+      width: min(560px, 72%);
+    }
+
+    .local-fnb-board img {
+      width: 100%;
+      height:360px;
+      max-width: none;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: white;
+      border-radius: var(--radius);
+      margin-top: 0;
+    }
+
+    .filter-bar {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      color: white;
+      cursor: pointer;
+      font-weight: 900;
+      letter-spacing: .02em;
+      transition: .2s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--yellow);
+      color: var(--ink);
+    }
+
+
+
+    #work {
+      background: #b9f957;
+      color: #2a2525;
+    }
+
+    #work .section-head h2 {
+      color: #4f6fff;
+    }
+
+    #work .kicker,
+    #work .lead,
+    #work .filter-btn,
+    #work .filter-btn.active,
+    #work .filter-btn:hover {
+      color: #2a2525;
+    }
+
+
+
+    #certificates {
+      background: #ffdf45;
+      color: #2a2525;
+    }
+
+    #certificates .section-head h2 {
+      color: #1d3fbf;
+    }
+
+    #certificates .kicker,
+    #certificates .lead,
+    #certificates .cert,
+    #certificates .cert b,
+    #certificates .cert p {
+      color: #2a2525;
+    }
+
+    #extracurricular {
+      background: #4f6fff;
+      color: #2a2525;
+    }
+
+    #extracurricular .section-head h2 {
+      color: #ffdf45;
+    }
+
+    #extracurricular .kicker,
+    #extracurricular .lead,
+    #extracurricular .cert,
+    #extracurricular .cert b,
+    #extracurricular .cert p {
+      color: #2a2525;
+    }
+
+    #extracurricular .certificate-wall {
+      gap: 24px;
+    }
+
+    #extracurricular .cert {
+      min-height: 220px;
+      padding: 24px 24px 68px;
+    }
+
+    #extracurricular .cert p {
+      line-height: 1.6;
+    }
+
+    #extracurricular .cert-view {
+      right: 24px;
+      bottom: 20px;
+      z-index: 2;
+    }
+
+    .project-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      position: relative;
+      min-height: 390px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      color: var(--ink);
+      transition: .25s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) rotate(-1deg);
+    }
+
+    .project-card:nth-child(2n):hover { transform: translateY(-10px) rotate(1deg); }
+
+    .mock-img {
+      height: 195px;
+      background:
+        linear-gradient(135deg, rgba(79,111,255,.72), rgba(255,223,69,.78)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 14px, transparent 14px 28px);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 72px;
+      text-shadow: 0 8px 25px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+
+    .mock-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .project-info {
+      padding: 22px;
+    }
+
+    .project-info small {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--cream);
+      color: var(--deep-blue);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .project-info h3 {
+      font-size: 24px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .project-info p {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .project-card::after {
+      content: "view";
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      background: var(--yellow);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .certificate-wall {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .cert {
+      position: relative;
+      background: white;
+      border-radius: 20px;
+      padding: 22px;
+      min-height: 230px;
+      box-shadow: var(--shadow);
+      transform: rotate(-1.5deg);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 16px;
+    }
+
+    .cert:nth-child(even) { transform: rotate(1.5deg); }
+    .cert b {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 0;
+      padding-bottom: 14px;
+      border-bottom: 3px solid #2a2525;
+      line-height: 1.15;
+    }
+    .cert p {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .cert-view {
+      position: absolute;
+      right: 22px;
+      bottom: 18px;
+      color: var(--deep-blue);
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1;
+      border-bottom: 4px solid var(--yellow);
+      padding-bottom: 4px;
+      transition: 0.2s ease;
+    }
+
+    .cert-view:hover {
+      transform: translateY(-3px);
+      color: #17203a;
+    }
+
+    .contact {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: #b9f957;
+      color: #2a2525;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+    }
+
+    .contact h2 {
+      font-size: clamp(58px, 11vw, 150px);
+      color: #1d3fbf;
+    }
+
+    .contact .lead {
+      color: #2a2525;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 210px;
+      padding: 16px 22px;
+      border-radius: 999px;
+      background: var(--cream);
+      border: 2px solid #1d3fbf;
+      color: #2a2525;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(0,0,0,.2);
+      transition: .2s ease;
+    }
+
+    .contact-links a:hover {
+      background: var(--yellow);
+      color: #2a2525;
+      transform: translateY(-5px);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(11, 16, 42, .72);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.open { display: grid; }
+
+    .modal-card {
+      width: min(920px, 96vw);
+      max-height: 88vh;
+      overflow: auto;
+      background: white;
+      border-radius: 30px;
+      box-shadow: 0 40px 100px rgba(0,0,0,.35);
+    }
+
+    .modal-hero {
+      min-height: 250px;
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(79,111,255,.8), rgba(255,223,69,.8)),
+        repeating-linear-gradient(45deg, transparent 0 14px, rgba(255,255,255,.35) 14px 28px);
+      color: white;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .modal-hero h3 {
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: .85;
+    }
+
+    .modal-hero h3:empty {
+      display: none;
+    }
+
+    .close {
+      border: 0;
+      background: white;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 30px;
+      color: var(--ink);
+    }
+
+    .modal-body p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .project-links {
+      margin: 8px 0 20px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .project-links a {
+      color: var(--deep-blue);
+      font-weight: 900;
+      border-bottom: 3px solid var(--yellow);
+      padding-bottom: 2px;
+    }
+
+    .modal-pdf-wrap {
+      margin-top: 24px;
+      background: var(--cream);
+      border-radius: 22px;
+      padding: 14px;
+      box-shadow: 0 10px 25px rgba(20, 31, 75, 0.12);
+    }
+
+    .modal-pdf-frame {
+      width: 100%;
+      height: min(78vh, 860px);
+      border: 0;
+      border-radius: 16px;
+      background: white;
+      display: block;
+    }
+
+    .modal-pdf-fallback {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .modal-pdf-fallback a {
+      color: var(--deep-blue);
+      font-weight: 900;
+      border-bottom: 3px solid var(--yellow);
+      padding-bottom: 2px;
+    }
+
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .modal-gallery.vertical {
+      grid-template-columns: 1fr;
+    }
+
+    .modal-gallery.masonry {
+      display: block;
+      column-count: 2;
+      column-gap: 18px;
+    }
+
+    .modal-gallery.masonry img {
+      width: 100%;
+      margin: 0 0 18px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .modal-gallery.ymac {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .ymac-stack,
+    .ymac-bottom {
+      display: grid;
+      gap: 18px;
+    }
+
+    .ymac-bottom {
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .modal-gallery img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 18px;
+      background: var(--cream);
+      box-shadow: 0 10px 25px rgba(20, 31, 75, 0.12);
+    }
+
+    .modal-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .modal-meta div {
+      background: var(--cream);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .modal-meta b {
+      display: block;
+      color: var(--deep-blue);
+      margin-bottom: 5px;
+    }
+
+    .footer-note {
+      position: absolute;
+      left: 7vw;
+      bottom: 22px;
+      color: rgba(255,255,255,.72);
+      font-size: 12px;
+      z-index: 3;
+    }
+
+
+    /* VIP employee badge profile redesign */
+    .profile-card.vip-card {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 16px 10px 10px;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      transform: none;
+      color: var(--ink);
+      min-height: 670px;
+      overflow: visible;
+    }
+
+    /* Whole lanyard group: sits above the badge and leans slightly to the right */
+    .lanyard-wrap {
+      position: absolute;
+      top: -88px;
+      left: 50%;
+      width: 280px;
+      height: 252px;
+      transform: translateX(-50%) rotate(3deg);
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* Two lanyard strips share the same bottom point so they meet naturally at the clip */
+    .lanyard {
+      position: absolute;
+      top: 0;
+      left: calc(50% - 17px);
+      width: 34px;
+      height: 226px;
+      border-radius: 999px;
+      transform-origin: bottom center;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,.32) 0 2px,
+          rgba(255,255,255,0) 2px 5px
+        ),
+        linear-gradient(180deg, #92b2ff 0%, #5f82ff 45%, #4268f4 72%, #7ca1ff 100%);
+      box-shadow:
+        inset 0 0 10px rgba(255,255,255,.38),
+        0 10px 18px rgba(29,63,191,.22);
+      z-index: 1;
+    }
+
+    .lanyard.left {
+      transform: rotate(-22deg);
+    }
+
+    .lanyard.right {
+      transform: rotate(22deg);
+    }
+
+    /* Covers the overlap where both straps meet, making the V-joint look like one continuous ribbon */
+    .lanyard-wrap::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 174px;
+      width: 46px;
+      height: 48px;
+      transform: translateX(-50%);
+      border-radius: 16px;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,.30) 0 2px,
+          rgba(255,255,255,0) 2px 5px
+        ),
+        linear-gradient(180deg, #7ca1ff 0%, #4268f4 100%);
+      box-shadow:
+        inset 0 0 9px rgba(255,255,255,.32),
+        0 8px 14px rgba(29,63,191,.18);
+      z-index: 3;
+    }
+
+    /* The clip sits on top of the badge, not floating away from it */
+    .clip {
+      position: absolute;
+      left: 50%;
+      top: 202px;
+      transform: translateX(-50%);
+      width: 64px;
+      height: 46px;
+      background: linear-gradient(180deg, #f5f5f5 0%, #d8d8d8 100%);
+      border: 1.5px solid rgba(190,190,190,.9);
+      border-radius: 10px;
+      box-shadow:
+        0 8px 14px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.75);
+      z-index: 8;
+    }
+
+    /* Small plastic hook from the clip into the badge shell */
+    .clip::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -34px;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 38px;
+      background: linear-gradient(180deg, #e9e9e9 0%, #c9c9c9 100%);
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 5px 8px rgba(0,0,0,.14);
+    }
+
+    .badge-shell {
+      position: relative;
+      z-index: 4;
+      width: 300px;
+      margin-top: 145px;
+      padding: 16px 13px 14px;
+      background: rgba(255,255,255,.25);
+      border: 7px solid rgba(220,220,220,.78);
+      border-radius: 20px;
+      box-shadow:
+        0 24px 35px rgba(0,0,0,.20),
+        inset 0 0 0 2px rgba(255,255,255,.45),
+        inset 0 0 18px rgba(255,255,255,.28);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      transform: rotate(-2deg);
+      overflow: hidden;
+    }
+
+    .badge-shell::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 13px;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.34) 0%,
+        rgba(255,255,255,.07) 42%,
+        rgba(255,255,255,.24) 100%
+      );
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .badge-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -55%;
+      width: 75%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,.26) 45%, transparent 100%);
+      transform: skewX(-10deg);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .badge-header {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      background: rgba(255,255,255,.72);
+      border-radius: 8px 8px 0 0;
+      padding: 10px 8px 8px;
+      margin-bottom: 10px;
+    }
+
+    .badge-vip {
+      font-size: 17px;
+      font-weight: 900;
+      color: #111;
+      line-height: 1;
+      letter-spacing: .02em;
+    }
+
+    .badge-subtitle {
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.12;
+    }
+
+    .profile-photo.badge-photo {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      aspect-ratio: .78 / 1;
+      border-radius: 7px;
+      overflow: hidden;
+      background: #f7f7f7;
+      border: 1px solid rgba(0,0,0,.08);
+      display: block;
+    }
+
+    .profile-photo.badge-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .vip-card .cursor {
+      display: none;
+    }
+
+    @media (max-width: 950px) {
+      .hero-wrap,
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .project-grid,
+      .certificate-wall {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .folder { min-height: 420px; }
+      .profile-card { transform: rotate(0); }
+    }
+
+    @media (max-width: 620px) {
+      .nav { position: absolute; border-radius: 22px; align-items: flex-start; }
+      .nav-links a { font-size: 12px; padding: 8px; }
+      section { padding: 118px 22px 60px; }
+      .project-grid,
+      .certificate-wall,
+      .stats,
+      .modal-meta,
+      .modal-gallery {
+        grid-template-columns: 1fr;
+      }
+      .folder { padding: 44px 24px; min-height: 360px; }
+      .skill-board { min-height: 420px; }
+      .skill-badge.graphic { width: 160px; height: 64px; left: 18px; top: 22px; font-size: 20px; }
+      .skill-badge.social { width: 96px; height: 138px; right: 18px; top: 20px; font-size: 19px; }
+      .skill-badge.digital { width: 170px; height: 80px; left: 18px; bottom: 26px; font-size: 18px; }
+      .skill-badge.advertising { width: 160px; height: 58px; right: 18px; bottom: 30px; font-size: 18px; }
+      .skill-cursor { right: 108px; top: 204px; }
+      .modal-gallery.masonry { column-count: 1; }
+      .modal-gallery.ymac,
+      .ymac-bottom { grid-template-columns: 1fr; }
+      .cert-body { grid-template-columns: 1fr; }
+      .cert-picture { border-left: 0; border-top: 3px solid #2a2525; padding-left: 0; padding-top: 16px; }
+      .flower { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <strong>Le Thi Hoai Yen</strong>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Works</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#extracurricular">Activities</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="sky" id="home">
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+    <div class="flower left"></div>
+    <div class="flower right"></div>
+
+    <div class="hero-wrap">
+      <div class="folder">
+        <h1 class="hero-title script">Hi, I'm Jessie!</h1>
+        <p class="hero-sub mono">and this is my interactive portfolio website.</p>
+        <div class="hero-tags">
+          <span class="pill">✦ Business Admin</span>
+          <span class="pill">✦ Marketing</span>
+          <span class="pill">✦ B2B</span>
+          <span class="pill">✦ Project management</span>
+        </div>
+      </div>
+
+      <div class="profile-card vip-card">
+        <div class="lanyard-wrap" aria-hidden="true">
+          <div class="lanyard left"></div>
+          <div class="lanyard right"></div>
+          <div class="clip"></div>
+        </div>
+
+        <div class="badge-shell">
+          <div class="badge-header">
+            <div class="badge-vip">VIP</div>
+            <div class="badge-subtitle">Very Investable Potential</div>
+          </div>
+
+          <div class="profile-photo badge-photo">
+            <img src="LinkedIn Avt.png" alt="Profile photo">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="sky" id="about">
+  <div class="section-head about-main-head">
+    <div class="kicker mono">What I do</div>
+    <h2 class="script">About me</h2>
+    <p class="lead">I aspire to build my career in HCMC with a strong desire to be a future leader. I'm looking for long-term opportunities in an international setting, whether working with foreign clients, global teams, or both. I hope you enjoy exploring my collections to see my potential.</p>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-left">
+      <h3 class="about-card-title">My Background</h3>
+      <div class="paper">
+        <p> Alongside maintaining excellent academic performance, I actively participate in community projects and networking activities. I've also earned multiple scholarships, challenged myself in competitions, and communicate fluently in English.</p>
+        <div class="stats">
+          <div class="stat"><b>12</b><span>Brand Projects</span></div>
+          <div class="stat"><b>8+</b><span>Events</span></div>
+          <div class="stat"><b>18+</b><span>Certificates</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-board local-fnb-board">
+      <h3 class="about-card-title brand-experience-title">Brand Experience</h3>
+      <img src="Local F&amp;B.png" alt="Local F&amp;B skills visual">
+    </div>
+  </div>
+</section>
+
+  <section class="sky" id="work">
+    <div class="section-head">
+      <div class="kicker mono">Explore my journey</div>
+      <h2 class="script">Value Created</h2>
+      <p class="lead">Click each card to open a detail popup.</p>
+    </div>
+
+    <div class="filter-bar" aria-label="Project filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="competition">Competitions</button>
+      <button class="filter-btn" data-filter="extra">Extracurricular</button>
+      <button class="filter-btn" data-filter="marketing">Marketing Courses</button>
+      <button class="filter-btn" data-filter="event">Events</button>
+    </div>
+
+    <div class="project-grid" id="projectGrid"></div>
+  </section>
+
+  <section class="sky" id="certificates">
+    <div class="section-head">
+      <div class="kicker mono">Proof of growth</div>
+      <h2 class="script">Certificates</h2>
+    </div>
+
+    <div class="certificate-wall">
+      <div class="cert">
+        <b>Best Poster Award - BBS’s Case Competition</b>
+        <p><strong>Issued:</strong> 12/2025<br><strong>Description:</strong> Role: Project Manager.</p>
+        <a class="cert-view" href="One Shot Best Poster Award.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>The Complete Project Management Master Class - PDUs Verified</b>
+        <p><strong>Issued:</strong> 10/2025<br><strong>Description:</strong> Covering demand planning, data-driven decision-making, and Lean Six Sigma principles.</p>
+        <a class="cert-view" href="The complete Project Management Master Class - PDUs Verified.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>First Prize - Youth Pulse - Debates for Progress</b>
+        <p><strong>Issued:</strong> 3/2025<br><strong>Description:</strong> An English group debate competition at EIU with 90+ participants to debate sensitive social issues.</p>
+        <a class="cert-view" href="First prize- Youth Pulse.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>Microsoft Office Specialist - Excel 2016</b>
+        <p><strong>Issued:</strong> 4/2023<br><strong>Description:</strong> Proficient, including data analysis, Solver, IF functions, Pivot Table and Lookups.</p>
+        <a class="cert-view" href="MOS EXCEL 2016 Certificate.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>Microsoft Office Specialist - Word 2016</b>
+        <p><strong>Issued:</strong> 4/2023<br><strong>Description:</strong> Proficient, including advanced formatting and professional report preparation.</p>
+        <a class="cert-view" href="MOS WORD 2016 Certificate.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sky" id="extracurricular">
+    <div class="section-head">
+      <div class="kicker mono">Beyond the classroom</div>
+      <h2 class="script">Extracurricular Activities</h2>
+    </div>
+
+    <div class="certificate-wall">
+      <div class="cert">
+        <b>YMAC 2026</b>
+        <p><strong>Description:</strong> Issued by Singapore Polytechnic (Singapore), representing Singapore, to discuss the theme of strengthening human capital, with the participation of over 120 students from 8 countries in the region.</p>
+        <a class="cert-view" href="Youth Model ASEAN Conference 2026.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>Vrije Universiteit Amsterdam Recognition 2026</b>
+        <p><strong>Description:</strong> Issued by VU (the Netherlands), conducting market research in Vietnam in the stainless steel industry, and meeting with the regional deputy director of Hoa Sen Group.</p>
+        <a class="cert-view" href="Declaration of excellent contribution for VU international research.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>MEP 2025</b>
+        <p><strong>Description:</strong> Issued by ARCY Agency (Singapore), in collaboration with NUS, ESSEC, SMU, and four ASEAN universities, to strengthen teamwork skills to solve multi-sectoral SDGs across ASEAN over six months with assignments from Traveloka and Seven Clean Seas.</p>
+        <a class="cert-view" href="Certificate of Completion MEP.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>Learning Express 2024 &amp; 2025</b>
+        <p><strong>Description:</strong> Issued by Singapore Polytechnic (Singapore), local community-based projects solved using a design thinking framework for real businesses: Bus Tokyu (2024) and Green Noen (2025).</p>
+        <a class="cert-view" href="Certification of Learning Express 2025&amp;2024.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>Specialists' Community Action and Leadership Exchange 2025</b>
+        <p><strong>Description:</strong> Issued by Temasek Foundation (Singapore), multi-sectoral collaboration to solve real business problems using design thinking and marketing, including Keat Hong community center in Singapore and Bach Dang pomelo orchards in Vietnam.</p>
+        <a class="cert-view" href="TF SCALE 2025.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+      <div class="cert">
+        <b>EIU Appreciation for Organizing Workshops</b>
+        <p><strong>Issued:</strong> 2025 by Honors Club, BBS<br><strong>Description:</strong> Appreciation for organizing workshops for JW Marriot, Fairfield and Protrade Garment.<br><strong>Role:</strong> Leader of Organizing Team.</p>
+        <a class="cert-view" href="Appreciation for EIU Workshops.pdf" target="_blank" rel="noreferrer">View it</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="cloud one"></div>
+    <div class="contact-inner">
+      <h2 class="script">Hope we can<br>work together</h2>
+      <p class="lead" style="margin-left:auto; margin-right:auto;">Thank you for visiting my portfolio. Feel free to contact me for collaborations, job opportunities or project discussions.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/yen-le-57g28120/" target="_blank" rel="noreferrer">LinkedIn: Yen Le</a>
+        <a href="mailto:jessie.yenle@gmail.com">Email: jessie.yenle@gmail.com</a>
+        <a href="tel:+84375469000">Phone/ Zalo/ WhatsApp: (+84) 375 469 000</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-hero">
+        <h3 class="script" id="modalTitle">Project</h3>
+        <button class="close" id="closeModal">Close ✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const projects = [
+{
+        title: "Marketing On Air 2025",
+        category: "competition",
+        icon: "🏆",
+        heroImage: "MOA 2025.png",
+        galleryLayout: "vertical",
+        gallery: [
+          "[MOA 2025] RTM_ PPS_DBJK_Madketing (1)-1.png",
+          "[MOA 2025] RTM_ PPS_DBJK_Madketing (1)-2.png",
+          "[MOA 2025] RTM_ PPS_DBJK_Madketing (1)-3.png",
+          "[MOA 2025] RTM_ PPS_DBJK_Madketing (1)-4.png",
+          "[MOA 2025] RTM_ PPS_DBJK_Madketing (1)-5.png"
+        ],
+        year: "2025",
+        role: "Team Leader",
+        tools: "Elevator Pitch & Time Management",
+        summary: "Led a proposal and elevator pitch within 96 hours, addressing customer journey pain points across TOFU and BOFU stages. The project was recognized for its strategic relevance, strong execution, and realistic branding activities.",
+        details: "As the leader of a 3-member team, I led the development of a 3-page proposal and an elevator pitching video within a 96-hour deadline.\nThe challenge focused on identifying and solving pain points within the customer journey to improve both motivations and barriers at the TOFU (Top of Funnel) and BOFU (Bottom of Funnel) stages.\nThe project received a score of 78/100 and was highly praised for its strong level of completion and strategic relevance. The campaign included several creative activities that effectively supported the brand-building process."
+      },
+{
+        title: "Marketing Challenger 2025",
+        category: "competition",
+        icon: "🏆",
+        heroImage: "marketing challenger 2025_background.jpg",
+        galleryLayout: "vertical",
+        gallery: [
+          "MarCha_BrandStormers-01.png",
+          "MarCha_BrandStormers-02.png",
+          "MarCha_BrandStormers-03.png",
+          "MarCha_BrandStormers-04.png",
+          "MarCha_BrandStormers-05.png",
+          "MarCha_BrandStormers-06.png",
+          "MarCha_BrandStormers-07.png",
+          "MarCha_BrandStormers-08.png",
+          "MarCha_BrandStormers-09.png",
+          "MarCha_BrandStormers-10.png",
+          "MarCha_BrandStormers-11.png",
+          "MarCha_BrandStormers-12.png",
+          "MarCha_BrandStormers-13.png",
+          "MarCha_BrandStormers-14.png",
+          "MarCha_BrandStormers-15.png"
+        ],
+        year: "2025",
+        role: "Team Leader",
+        tools: "Marketing strategy, case analysis, presentation",
+        summary: "My first marketing competition for LG’s AI home appliances was praised for logical research, effective data presentation, and a realistic, executable creative idea.",
+        details: "The challenge was to localize LG’s “Affectionate Intelligence” by making its AI feel more human, relatable, and culturally relevant to Vietnamese consumers through meaningful everyday experiences.\nAs my first marketing competition, I received positive feedback for effectively selecting, presenting, and logically analyzing data in both market and brand research. The creative idea was also praised for being realistic and easily executable. One of the key areas for improvement was competitor analysis and strategy."
+      },
+{
+        title: "Projects from Professional Experience",
+        category: "event",
+        displayCategory: "Event",
+        image: "queen\'s winery_1.jpg",
+        heroImage: "queen\'s winery_1.jpg",
+        icon: "💼",
+        year: "2025",
+        role: "Event Coordinator",
+        tools: "Event coordination, planning, execution, communication",
+        summary: "Hands-on event coordination experience from professional projects, including planning support and on-site execution.",
+        details: "Below are the events I worked on, where I was involved in planning, coordinating with partners for bookings, and handling setup and site checks. These included a destination intimate wedding at Angsana Lang Co for Dadamplanning company, three wine tasting events, and one team-building event for Queen’s Winery.",
+        galleryLayout: "masonry",
+        gallery: [
+          "dadam_planning_1.jpg",
+          "dadam_planning_2.jpg",
+          "dadam_planning_3.jpg",
+          "queen's winery_1.jpg",
+          "queen's winery_2.jpg",
+          "queen's winery_3.jpg",
+          "queen's winery_4.jpg",
+          "queen's winery_5.jpg",
+          "queen's winery_6.jpg"
+        ]
+      },
+{
+        title: "Keat Hong Community Center - TFSCALE 2025",
+        category: "extra",
+        icon: "🌱",
+        image: "TF_SCALE 2025_group.jpg",
+        heroImage: "TF_SCALE 2025_group.jpg",
+        year: "2025",
+        role: "Project member",
+        tools: "Design thinking, community research, website planning",
+        summary: "A 2-week Project in Singapore, where the team used design thinking to propose a simplified website encouraging greater community participation among male seniors at Keat Hong Community Center.",
+        details: "Selected for the fully funded 2-week Temasek Foundation Specialists' Community Action and Leadership Exchange (TF SCALE) Programme in Singapore, focusing on cross-cultural collaboration, leadership development, and ASEAN youth networking through academic immersion and community-based projects.n\This project focused on encouraging male seniors at Keat Hong Community Center to participate more actively in community activities. Using the design thinking framework, the team explored user needs, developed ideas, and proposed a simplified website to make activity information easier to access and understand.",
+        links: [
+          { label: "YouTube", text: "Watch project video", url: "https://www.youtube.com/watch?v=Uh2vuCBUg3w&t=1s" },
+          { label: "Outcome", text: "View simplified website", url: "https://keat-hong-connect-friends.lovable.app/" }
+        ],
+        gallery: [
+          "TF SCALE_1.jpg",
+          "TF SCALE_2.jpg",
+          "TF SCALE_3.jpg",
+          "TF SCALE_4.jpg",
+          "TF SCALE_5.jpg",
+          "TF SCALE_6.jpg",
+          "TF SCALE_7.jpg"
+        ]
+      },
+{
+        title: "Youth Model ASEAN Conference (YMAC) - 2026",
+        category: "extra",
+        icon: "🌏",
+        image: "YMAC_background.jpg",
+        heroImage: "YMAC_background.jpg",
+        year: "2026",
+        role: "Participant / Representative",
+        tools: "International collaboration, regional discussion, human capital development",
+        summary: "Selected to represent ASM Singapore at YMAC 2026, joining excellent students from 8 ASEAN countries to discuss strengthening human capital.",
+        details: "This year’s theme was STRENGTHENING ASEAN with participation of excellent students from 8 ASEAN countries. Out of hundreds applicants, I was selected and represented ASM Singapore. It was a fascinating exercise to look at the region through the lens of a developed, and aging nation under Working Group 2: Strengthen Human Capital.",
+        galleryLayout: "ymac",
+        gallery: [
+          "YMAC 2026_1.jpg",
+          "YMAC 2026_2.jpg",
+          "YMAC 2026_3.jpg",
+          "YMAC 2026_4.jpg",
+          "YMAC 2026_5.jpg"
+        ]
+      },
+{
+        title: "JW Marriot & Fairfield",
+        category: "event",
+        icon: "🎪",
+        image: "JW_Marriot_background.jpg",
+        heroImage: "JW_Marriot_background.jpg",
+        galleryLayout: "vertical",
+        gallery: [
+          "JW_Marriot_1.jpg",
+          "JW_Marriot_2.jpg",
+          "JW_Marriot_3.jpg",
+          "JW_Marriot_4.jpg",
+          "JW_Marriot_5.jpg",
+          "JW_Marriot_6.jpg"
+        ],
+        year: "2025",
+        role: "MC",
+        tools: "Public speaking, event hosting, communication",
+        summary: "An event experience with JW Marriot and Fairfield, highlighting my role as MC and my contribution to creating a smooth participant experience.",
+        details: "Co-organized a hospitality ethics workshop in collaboration with my university and two big hotels, contributing as both MC and event planner. Received a Certificate of Appreciation from the university for outstanding contribution to the event."
+      },
+{
+        title: "MKTG 466 - Global Marketing",
+        category: "marketing",
+        displayCategory: "Marketing Course",
+        icon: "📣",
+        image: "466_background.png",
+        heroImage: "466_background.png",
+        year: "2026",
+        role: "Marketing student / Team member",
+        tools: "Global marketing, market entry, international strategy",
+        summary: "A global marketing course output analyzing 7-Eleven in Thailand through an international marketing lens.",
+        details: "This course project analyzes 7-Eleven in Thailand from a global marketing perspective, including market context, strategic decisions and international marketing implications.",
+        pdf: "MKTG 466 - Global Marketing_7-eleven_Thailand.pdf"
+      },
+{
+        title: "BUS 450 - Business Research",
+        category: "marketing",
+        displayCategory: "Marketing Course",
+        icon: "📊",
+        image: "450_background.png",
+        heroImage: "450_background.png",
+        year: "2026",
+        role: "Research student / Team member",
+        tools: "Business research, methodology, analysis, reporting",
+        summary: "A business research course output presenting the research topic, methodology, analysis and final report.",
+        details: "This course project presents the BUS 450 business research output, including research background, methodology, analysis and final findings.",
+        pdf: "BUS 450-Business Research.pdf"
+      }
+    ];
+
+    const grid = document.getElementById("projectGrid");
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalBody = document.getElementById("modalBody");
+    const modalHero = document.querySelector(".modal-hero");
+    const closeModal = document.getElementById("closeModal");
+    const defaultModalHeroBackground = modalHero.style.background || getComputedStyle(modalHero).background;
+
+    function renderProjects(filter = "all") {
+      grid.innerHTML = "";
+      projects
+        .filter(project => filter === "all" || project.category === filter)
+        .forEach(project => {
+          const card = document.createElement("article");
+          card.className = "project-card";
+          card.dataset.category = project.category;
+          const cardImage = project.image || project.heroImage;
+          const visual = cardImage
+            ? `<img src="${cardImage}" alt="${project.title}">`
+            : project.icon;
+          card.innerHTML = `
+            <div class="mock-img script">${visual}</div>
+            <div class="project-info">
+              <h3>${project.title}</h3>
+              <small>${project.displayCategory || project.category}</small>
+              <p>${project.summary}</p>
+            </div>
+          `;
+          card.addEventListener("click", () => openProject(project));
+          grid.appendChild(card);
+        });
+    }
+
+    function openProject(project) {
+      modalTitle.textContent = "";
+      modalHero.style.background = project.heroImage
+        ? `linear-gradient(135deg, rgba(79,111,255,.55), rgba(255,223,69,.35)), url("${project.heroImage}") center / cover no-repeat`
+        : defaultModalHeroBackground;
+      const projectLinks = project.links ? `
+        <div class="project-links">
+          ${project.links.map(link => `<div><strong>${link.label}:</strong> <a href="${link.url}" target="_blank" rel="noreferrer">${link.text}</a></div>`).join("")}
+        </div>
+      ` : "";
+      const projectPdf = project.pdf ? `
+        <div class="modal-pdf-wrap">
+          <iframe class="modal-pdf-frame" src="${project.pdf}#view=FitH" title="${project.title} PDF"></iframe>
+          <p class="modal-pdf-fallback"><a href="${project.pdf}" target="_blank" rel="noreferrer">Click to view full PDF</a></p>
+        </div>
+      ` : "";
+      let projectGallery = "";
+      if (project.gallery && project.galleryLayout === "ymac") {
+        const [image1, image2, image3, image4, image5] = project.gallery;
+        projectGallery = `
+          <div class="modal-gallery ymac">
+            <div class="ymac-stack">
+              <img src="${image1}" alt="${project.title} image 1">
+              <img src="${image5}" alt="${project.title} image 5">
+            </div>
+            <img src="${image4}" alt="${project.title} image 4">
+            <div class="ymac-bottom">
+              <img src="${image2}" alt="${project.title} image 2">
+              <img src="${image3}" alt="${project.title} image 3">
+            </div>
+          </div>
+        `;
+      } else if (project.gallery) {
+        const galleryClass = project.galleryLayout === "vertical" ? "modal-gallery vertical" : project.galleryLayout === "masonry" ? "modal-gallery masonry" : "modal-gallery";
+        projectGallery = `
+          <div class="${galleryClass}">
+            ${project.gallery.map((image, index) => `<img src="${image}" alt="${project.title} image ${index + 1}">`).join("")}
+          </div>
+        `;
+      }
+      modalBody.innerHTML = `
+        <p>${project.details.replace(/\n/g, "<br>")}</p>
+        ${projectLinks}
+        <div class="modal-meta">
+          <div><b>Year</b><span>${project.year}</span></div>
+          <div><b>Role</b><span>${project.role}</span></div>
+          <div><b>Tools / Skills</b><span>${project.tools}</span></div>
+        </div>
+        ${projectPdf}
+        ${projectGallery}
+      `;
+      modal.classList.add("open");
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        renderProjects(button.dataset.filter);
+      });
+    });
+
+    closeModal.addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", event => {
+      if (event.target === modal) modal.classList.remove("open");
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") modal.classList.remove("open");
+    });
+
+    renderProjects();
+  </script>
+</body>
+</html>
